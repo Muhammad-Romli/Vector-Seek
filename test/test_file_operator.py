@@ -10,7 +10,7 @@ def test_read_from_flat_dir(tmp_path):
         raise Exception("result return None")
 
     assert len(result) == 1
-    assert result[0]["from_file"] == "note.md"
+    assert result[0]["from_file"] == str(tmp_path / "note.md")
     assert result[0]["content"] == "# hello"
 
 
@@ -28,8 +28,8 @@ def test_read_from_nested_dir(tmp_path):
 
 
 def test_read_from_missing_dir():
-    result = read_from("this_dir_does_not_exist")
-    with py
+    with pytest.raises(FileNotFoundError):
+        read_from("not_exist_dir")
 
 
 def test_read_from_empty_subfolder_skipped(tmp_path):
@@ -39,3 +39,24 @@ def test_read_from_empty_subfolder_skipped(tmp_path):
     result = read_from(str(tmp_path))
 
     assert result == []
+
+
+
+
+
+
+
+
+def test_convert_file_dict_to_dict_metadata():
+    test_dict = [{
+        "from_file": "test_file",
+        "content": """
+# Title 1
+This belong to title 1
+""",
+    }]
+    expected_result = [{
+        "from_file" : "test_file",
+        "title": "# Title 1",
+        "content": "\nThis belong to title 1\n",
+    }]
