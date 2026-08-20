@@ -55,8 +55,10 @@ def test_convert_file_dict_to_dict_metadata():
 This belong to title 1
 """,
     }]
-    expected_result = [{
+    expected_result = [[{
         "from_file" : "test_file",
         "title": "# Title 1",
-        "content": "\nThis belong to title 1\n",
-    }]
+        "content": ["This belong to title 1"],
+    }]]
+    actual_result = convert_file_dict_to_dict_metadata(test_dict)
+    assert expected_result == actual_result
