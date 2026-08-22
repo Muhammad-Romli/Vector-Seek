@@ -11,7 +11,7 @@ def markdown_to_dict_metadata(file_name: str, markdown: str) -> list[dict[str | 
     if matches[0].strip() != "":
         chunk = {
             "from_file": file_name,
-            "title": None,
+            "from_title": None,
             "chunk_id": 0,
             "content": matches[0].split("\n\n") # get splitted for paragraph
         }
@@ -22,12 +22,12 @@ def markdown_to_dict_metadata(file_name: str, markdown: str) -> list[dict[str | 
     index_num = 1
     for i in range(1, len(matches), 2): #we start iterating from index 1 because index 0 is already getting taken care of
 
-        title = matches[i].strip()
+        from_title = matches[i].strip()
         content = matches[i+1] if i + 1 < len(matches) else ""  #if it "" it will get turned to None later
 
         chunk = {
             "from_file": file_name,
-            "title": title,
+            "from_title": from_title,
             "chunk_id": index_num,
             "content": content.split("\n\n") # get splitted for paragraph
         }

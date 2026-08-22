@@ -3,10 +3,8 @@ import numpy as np
 import json
 
 def metadata_to_vector(metadatas: list[dict[str | None, list[str] | None]]):
-    contents = []
-    list_similarity_results = []
+    contents = [] 
     all_embed_metadatas = []
-    top_5_similarity = []
 
     for data in metadatas:
         content = data["content"]
