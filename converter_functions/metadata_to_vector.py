@@ -22,15 +22,8 @@ def metadata_to_vector(metadatas: list[dict[str | None, list[str] | None]]):
         embed_metadata = format_embed_metadata(i, contents[i], embeddings[i])
         all_embed_metadatas.append(embed_metadata)
     
-    with open("embeddings.json", "w") as f:
+    with open("embeddings.json", "w", encoding="utf-8") as f:
         json.dump(all_embed_metadatas, f)
-
-
-
-
-def cosine_similarity(chunk1, chunk2):
-    dot_product = np.dot(chunk1, chunk2)
-    return dot_product / (np.linalg.norm(chunk1) * np.linalg.norm(chunk2))
 
 
 def format_embed_metadata(id, chunk, embedding) -> dict[str, str]:
