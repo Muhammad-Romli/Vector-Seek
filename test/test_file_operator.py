@@ -57,6 +57,7 @@ This belong to title 1
     }]
     expected_result = [[{
         "from_file" : "test_file",
+        'chunk_id': 1,
         "title": "# Title 1",
         "content": ["This belong to title 1"],
     }]]

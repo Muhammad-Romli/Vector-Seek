@@ -12,6 +12,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [{
         "from_file":  "Diary",
         "title": "# Dear diary",
+        "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     }]
 
@@ -36,11 +37,13 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [{
         "from_file":  "Diary",
         "title": "# Dear diary",
+        "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     },
     {
         "from_file": "Diary",
         "title": "# REASON WHY I HATE ULCER",
+        "chunk_id": 2,
         "content": ["""- Painful
 - Attack me for no reason
 - Painful
@@ -60,6 +63,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i
     expected_result = [{
         "from_file":  "Diary",
         "title": None,
+        "chunk_id": 0,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i forgot to add title"]
     }]
 
@@ -81,6 +85,7 @@ And i still code this day
     expected_result = [{
         "from_file":  "Diary",
         "title": "# Dear diary",
+        "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it", "And i still code this day"]
     }]
 
@@ -101,12 +106,48 @@ For the last 3 days i got painful ulcer and right now is the peak of it
         {
             "from_file":  "Diary",
             "title": None,
+            "chunk_id": 0,
             "content": ["this diary wrote in August 20 2026"]
         },
         {
             "from_file":  "Diary",
             "title": "# Dear diary",
+            "chunk_id": 1,
             "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
+        }
+    ]
+
+    assert actual_result == expected_result
+
+def test_title_with_no_contents_at_the_end():
+    
+    actual_result = markdown_to_dict_metadata("Diary", """
+this diary wrote in August 20 2026
+# Dear diary
+
+For the last 3 days i got painful ulcer and right now is the peak of it
+
+# END
+""")
+
+    expected_result = [
+        {
+            "from_file":  "Diary",
+            "title": None,
+            "chunk_id": 0,
+            "content": ["this diary wrote in August 20 2026"]
+        },
+        {
+            "from_file":  "Diary",
+            "title": "# Dear diary",
+            "chunk_id": 1,
+            "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
+        },
+        {
+            "from_file":  "Diary",
+            "title": "# END",
+            "chunk_id": 2,
+            "content": [None]
         }
     ]
 
