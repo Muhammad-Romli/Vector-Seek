@@ -1,28 +1,30 @@
-def format_top_similarity(similarities: list[dict]):
+BOLD = "\033[1m"
+RESET = "\033[0m"
+GREEN = "\033[32m"
+CYAN = "\033[36m"
+BRIGHT_GREEN = "\033[92m"
+
+def format_top_similarity(embed_metadatas: list[dict], num_shown: int):
+
+
     print("\n" * 10)
     print("=" * 110)
-    print("                    Result of similarities search from most similar to least:                    ")
+    print(f"                    {CYAN}{BOLD}Result of similarities search from most similar to least:{RESET}                    ")
     print("=" * 110)
-    for similarity in similarities:
-        print(similarity["chunk"])
-        from_file = similarity["chunk"]["from_file"]
-        from_title = similarity["chunk"]["from_title"]
-        chunk_id = similarity["chunk"]["chunk_id"]
-        content = similarity["chunk"]["content"]
-
-
+    count = 0
+    for embed_metadata in embed_metadatas[:num_shown]:
+        count += 1
         print(f"""
 
+        {BOLD}{GREEN}RESULT {count}{RESET}:
+{embed_metadata["content"]}
 
-    from_file: {from_file}
-    from_title(H1): {from_title}
-    chunk_id: {chunk_id}
-    content: {content}
+{BRIGHT_GREEN}{BOLD}FROM_FILE:{RESET} {embed_metadata["metadata"]["from_file"]}
+{BRIGHT_GREEN}{BOLD}FROM_TITLE:{RESET} {embed_metadata["metadata"]["from_title"]}
+{BRIGHT_GREEN}{BOLD}CHUNK ID:{RESET} {embed_metadata["metadata"]["chunk_id"]}
 
 
-{print("\n" * 3)}
-{print("-" *  50)}
-{print("\n" * 3)}
+{"_" * 110}
 """)
 
-# similarities variable data, should look like wmbed_metadata like dataflow number 3 in README.md
+# embed_metadatas variable data, should look like wmbed_metadata like dataflow number 3 in README.md

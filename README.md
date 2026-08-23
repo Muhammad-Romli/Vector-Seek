@@ -39,7 +39,10 @@ ___
 3. We gonna turn the list of list of metadata into embeddings and then stored it in embeddings.json
     embed_metadata = {
         "id": id,
-        "chunk": chunk,
+        "content": content,
         "embedding": embedding.tolist(),
+        "metadata": metadata
     }
-    where chunk is just like chunk in no.2, hopefully
+    where metadata is chunk without content, an
+
+___

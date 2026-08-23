@@ -17,3 +17,6 @@ def search_top_similarities(query: str, stored_metadatas: list[dict], num_simila
 def cosine_similarity(chunk1, chunk2):
     dot_product = np.dot(chunk1, chunk2)
     return dot_product / (np.linalg.norm(chunk1) * np.linalg.norm(chunk2))
+
+
+# search_top_similarities function return what in README.md Flow Of Data, number 3SSS
