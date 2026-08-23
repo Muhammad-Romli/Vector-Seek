@@ -6,10 +6,12 @@ def search_top_similarities(query: str, stored_metadatas: list[dict], num_simila
     model = SentenceTransformer("all-MiniLM-L6-v2")
     embedded_query = model.encode(query)
     for metadata in stored_metadatas:
-        comparison = cosine_similarity(embedded_query, metadata)
+        metadata_embedding = metadata["embedding"]
+        comparison = cosine_similarity(embedded_query, metadata_embedding)
         all_comparisons.append(comparison)
-    top_n_similarity = np.argsort(all_comparisons)[::-1]
-    return top_n_similarity[num_similarities_shown]
+    sorted_indices = np.argsort(all_comparisons)[::-1]
+    top_indices = sorted_indices[:num_similarities_shown]
+    return [stored_metadatas[i] for i in top_indices]
 
 
 def cosine_similarity(chunk1, chunk2):

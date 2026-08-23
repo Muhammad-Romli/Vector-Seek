@@ -19,3 +19,5 @@ def format_top_similarity(similarities: list[dict]):
 
 {print("-" *  50)}
 """)
+
+# similarities variable data, should look like wmbed_metadata like dataflow number 3 in README.md

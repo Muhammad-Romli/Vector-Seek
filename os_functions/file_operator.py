@@ -1,5 +1,4 @@
 import os
-import json
 from converter_functions.markdown_converter import markdown_to_dict_metadata
 
 def read_from(path: str="src") -> list[dict[str, str]] | None:

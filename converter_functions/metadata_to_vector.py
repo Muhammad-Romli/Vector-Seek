@@ -9,20 +9,26 @@ def metadata_to_vector(list_of_metadatas: list[list[dict[str, str | list[str] | 
     for metadatas in list_of_metadatas:
         for data in metadatas:
             content = data["content"]
-            contents.append(content)
-        model = SentenceTransformer("all-MiniLM-L6-v2")
-        embeddings = model.encode(
-            contents,
-            batch_size = 4,
-            show_progress_bar=True
-        )
+            if isinstance(content, str):
+                contents.append(content)
+            elif isinstance(content, list):
+                for content_str in content:
+                    contents.append(content_str)
+            else:
+                raise Exception("what type are you even are?")
+    model = SentenceTransformer("all-MiniLM-L6-v2")
+    embeddings = model.encode(
+        contents,
+        batch_size = 4,
+        show_progress_bar=True
+    )
 
-        for i in range(len(embeddings) - 1):
-            embed_metadata = format_embed_metadata(i, contents[i], embeddings[i])
-            all_embed_metadatas.append(embed_metadata)
-    
-        with open("embeddings.json", "w", encoding="utf-8") as f:
-            json.dump(all_embed_metadatas, f)
+    for i in range(len(embeddings)):
+        embed_metadata = format_embed_metadata(i, contents[i], embeddings[i])
+        all_embed_metadatas.append(embed_metadata)
+
+    with open("embeddings.json", "w", encoding="utf-8") as f:
+        json.dump(all_embed_metadatas, f)
 
 
 def format_embed_metadata(id, chunk, embedding) -> dict[str, str]:
