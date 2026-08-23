@@ -17,7 +17,10 @@ def format_top_similarity(embed_metadatas: list[dict], num_shown: int):
     print("=" * width)
     count = 0
     for embed_metadata in embed_metadatas[:num_shown]:
-        wrapped_text = textwrap.fill(embed_metadata["content"], width=100)
+        wrapped_text = textwrap.fill(embed_metadata["content"], 
+                                    width=100,
+                                    initial_indent="\t",
+                                    subsequent_indent="\t",)
         count += 1
         print(f"""
 
