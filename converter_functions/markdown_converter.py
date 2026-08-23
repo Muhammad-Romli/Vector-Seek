@@ -1,6 +1,6 @@
 import re
 
-def markdown_to_dict_metadata(file_name: str, markdown: str) -> list[dict[str | None, str | list[str] | None]]:
+def markdown_to_dict_metadata(file_name: str, markdown: str) -> list[dict[str, str | list[str] | None]]:
     # Turning markdown into dict that contain the original
     list_of_chunk =  []
     pattern = r"^(#\s+.+)$"
