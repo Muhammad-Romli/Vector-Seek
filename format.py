@@ -1,8 +1,10 @@
 def format_top_similarity(similarities: list[dict]):
-    print("=" * 50)
+    print("\n" * 10)
+    print("=" * 110)
     print("                    Result of similarities search from most similar to least:                    ")
-    print("=" * 50)
+    print("=" * 110)
     for similarity in similarities:
+        print(similarity["chunk"])
         from_file = similarity["chunk"]["from_file"]
         from_title = similarity["chunk"]["from_title"]
         chunk_id = similarity["chunk"]["chunk_id"]
@@ -17,7 +19,10 @@ def format_top_similarity(similarities: list[dict]):
     chunk_id: {chunk_id}
     content: {content}
 
+
+{print("\n" * 3)}
 {print("-" *  50)}
+{print("\n" * 3)}
 """)
 
 # similarities variable data, should look like wmbed_metadata like dataflow number 3 in README.md
