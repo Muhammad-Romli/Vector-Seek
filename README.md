@@ -9,13 +9,22 @@ First, to embed your text and make it vector.
 Second, to search not based by matching keywords, and instead by context and the meaning of the words
 
 ___
+## What i learn from this project:
+
+- Using External Library
+- Creating my own data structure that contain things l
+- Creating advance Data Pipelines
+- Formatting
+
+___
 ## Dependency
 
 - Pytest
-- Embedding model
+- Pytorcg
+- Sentence Transformer
 
 ___
-##  Flow Of Data
+##  Flow Of Data (Personal Note) 
 
 1. The data get read from src folder by read_from function
 
@@ -46,3 +55,10 @@ ___
     where metadata is chunk without content, an
 
 ___
+
+## Preview:
+
+##### *-Video:*
+
+
+##### *-Screenshots:*
