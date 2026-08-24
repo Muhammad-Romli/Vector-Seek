@@ -1,7 +1,24 @@
 # Vector-Seek
 
 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+
+
+
+
+![Status](https://img.shields.io/badge/status-in--progress-yellow)
+
+
+
 ___
+
+## Table of contents
+- [Introduction]($introduction) 
+- [What I Learned]($what-i-learned) 
+- [Dependencies]($dependencies) 
+- [Data Flow]($data-flow) 
+- [Preview]($preview) 
+
 ## Introduction
 Vector-Seek is program that allow you to do this 2 incredible things:
 
@@ -12,7 +29,7 @@ ___
 ## What i learn from this project:
 
 - Using External Library
-- Creating my own data structure that contain things l
+- Creating my own data structure that contain things like metadata and keep transforming it through multiple functions
 - Creating advance Data Pipelines
 - Formatting
 
