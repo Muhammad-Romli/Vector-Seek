@@ -61,15 +61,19 @@ file_package = {
 # list[dict[str, str]]
 
 
-2. The list of file_package get parse into chunk of metadata by convert_file_dict_to_dict_metadata(this was in file_operator.py and a higher level function because markdown_to_metadata only accept markdown the (content of the file))
+<details>
+<summary><strong>1. Parse into metadata chunks</strong></scontent
 
-        chunk = {
-            "from_file": file_name,
-            "from_title": from_title,
-            "chunk_id": index_num,
-            "content": content.split("\n\n") # get splitted for paragraph
-        }
-    list[list[dict[str, str]]]
+convert_file_dict_to_dict_metadata() (in file_operator.py) wraps markdown_to_metadata, since the lower-level function only accepts raw markdown content:
+
+        ```chunk = {
+    "from_file": file_name,
+    "from_title": from_title,
+    "chunk_id": index_num,
+    "content": content.split("\n\n"),  # split by paragraph
+}
+# list[list[dict[str, str]]]```
+
 
 3. We gonna turn the list of list of metadata into embeddings and then stored it in embeddings.json
     embed_metadata = {
