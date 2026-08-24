@@ -13,43 +13,52 @@
 ___
 
 ## Table of contents
+
 - [Introduction]($introduction) 
 - [What I Learned]($what-i-learned) 
 - [Dependencies]($dependencies) 
 - [Data Flow]($data-flow) 
 - [Preview]($preview) 
 
+
 ## Introduction
-Vector-Seek is program that allow you to do this 2 incredible things:
 
-First, to embed your text and make it vector. 
-Second, to search not based by matching keywords, and instead by context and the meaning of the words
+Vector-Seek does two things:
+
+1. **Embeds** your text — turns raw content into vectors.
+2. **Searches** by context and meaning, instead of exact keyword matches.
+
+
+## What I Learned
+
+- Working with external libraries (`sentence-transformers`, `numpy`)
+- Designing custom data structures that carry metadata through a pipeline
+- Building multi-stage data pipelines
+- Structuring and documenting a real project without guide
+
+
+## Dependencies
+
+| Library | Purpose |
+|---|---|
+| `pytest` | Testing |
+| `sentence-transformers` | Generating embeddings |
+| `numpy` | Cosine similarity math |
 
 ___
-## What i learn from this project:
+## Data Flow
 
-- Using External Library
-- Creating my own data structure that contain things like metadata and keep transforming it through multiple functions
-- Creating advance Data Pipelines
-- Formatting
+<details>
+<summary><strong>1. Read files from <code>src/</code></strong></summary>
 
-___
-## Dependency
+`read_from()` returns a list of file packages:
 
-- Pytest
-- Pytorcg
-- Sentence Transformer
-
-___
-##  Flow Of Data (Personal Note) 
-
-1. The data get read from src folder by read_from function
-
-   file_package = {
-        "from_file": file_path,
-        "content": file_content,
-    }
-    list[dict[str, str]]
+```python
+file_package = {
+    "from_file": file_path,
+    "content": file_content,
+}
+# list[dict[str, str]]
 
 
 2. The list of file_package get parse into chunk of metadata by convert_file_dict_to_dict_metadata(this was in file_operator.py and a higher level function because markdown_to_metadata only accept markdown the (content of the file))
