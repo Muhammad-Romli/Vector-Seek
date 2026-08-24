@@ -1,6 +1,6 @@
 # Vector-Seek
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Python](https://img.shields.io/badge/Python-3.14-blue)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
@@ -10,6 +10,7 @@ A semantic search engine that embeds text into vectors and retrieves results by 
 - [Introduction](#introduction)
 - [What I Learned](#what-i-learned)
 - [Dependencies](#dependencies)
+- [How To Clone] (#how-to-clone) 
 - [Data Flow](#data-flow)
 - [Preview](#preview)
 
@@ -34,6 +35,9 @@ Vector-Seek does two things:
 | `pytest` | Testing |
 | `sentence-transformers` | Generating embeddings |
 | `numpy` | Cosine similarity math |
+
+## How To Clone
+
 
 ## Data Flow
 
