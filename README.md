@@ -6,6 +6,9 @@
 
 A semantic search engine that embeds text into vectors and retrieves results by **meaning**, not keyword matching.
 
+> **Looking for a UI?** Vector-Seek is the backend only. Check out [Oculus](https://github.com/Muhammad-Romli/Oculus), the frontend that gives this project an interface.
+> Live site: coming soon.
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [What I Learned](#what-i-learned)
@@ -14,6 +17,7 @@ A semantic search engine that embeds text into vectors and retrieves results by 
 - [Project Structure](#project-structure)
 - [How to Use](#how-to-use)
 - [Data Flow](#data-flow)
+- [Related Projects](#related-projects)
 - [Preview](#preview)
 
 ## Introduction
@@ -29,6 +33,7 @@ Vector-Seek does two things:
 - Designing custom data structures that carry metadata through a pipeline
 - Building multi-stage data pipelines
 - Structuring and documenting a real project
+- Exposing the pipeline as an API with `FastAPI` and `uvicorn`
 
 ## Dependencies
 
@@ -37,6 +42,8 @@ Vector-Seek does two things:
 | `pytest` | Testing |
 | `sentence-transformers` | Generating embeddings |
 | `numpy` | Cosine similarity math |
+| `fastapi` | Exposing the backend as an API |
+| `uvicorn` | ASGI server to run the FastAPI app |
 
 ## Installation
 
@@ -55,6 +62,7 @@ Install PyTorch as a **CPU-only build first**, before installing `sentence-trans
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 pip install sentence-transformers
 pip install pytest
+pip install fastapi uvicorn
 ```
 
 ## Project Structure
@@ -139,6 +147,11 @@ embed_metadata = {
 }
 ```
 </details>
+
+## Related Projects
+
+- **[Oculus](https://github.com/Muhammad-Romli/Oculus)** — the frontend/web interface built on top of this backend.
+  - **Live site:** coming soon
 
 ## Preview
 
