@@ -43,6 +43,7 @@ Vector-Seek does two things:
 | `sentence-transformers` | Generating embeddings |
 | `numpy` | Cosine similarity math |
 | `fastapi` | Exposing the backend as an API |
+| `fastapi[standard]` | Required to host in FastAPI Clouds |
 | `uvicorn` | ASGI server to run the FastAPI app |
 
 ## Installation
