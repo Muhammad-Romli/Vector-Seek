@@ -68,7 +68,7 @@ def embed_chunks_and_query(
                     contents.append(content_str)
                     metadatas_without_content.append({k: v for k, v in data.items() if k != "content"})
 
-    contents.append(query)  # appending the qwery to contents so is get embedding at one go
+    contents.append(query)  # appending the query to contents, so is get embedded at one go
 
     model = get_model()
     embeddings = model.encode(contents, batch_size=4, show_progress_bar=True)
@@ -81,7 +81,7 @@ def embed_chunks_and_query(
         for i in range(len(chunk_embeddings))
     ]
 
-    return all_embed_metadatas, query_embedding
+    return all_embed_metadatas, query_embedding #np.ndarray is the query_embedding
 
 
 def format_embed_metadata(id, content, embedding, metadata) -> dict[str, str]:
