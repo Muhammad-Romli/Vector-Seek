@@ -1,8 +1,7 @@
-from sentence_transformers import SentenceTransformer
 from model_loader import get_model
 import numpy as np
 
-def search_top_similarities(query: str, stored_metadatas: list[dict], num_similarities_shown: int) -> list[dict]: #im very terrible at naming lol
+def search_top_similarities(query: str, stored_metadatas: list[dict], n: int) -> list[dict]: #im very terrible at naming lol
     all_comparisons = []
     model = get_model()
     embedded_query = model.encode(query)
@@ -11,9 +10,8 @@ def search_top_similarities(query: str, stored_metadatas: list[dict], num_simila
         comparison = cosine_similarity(embedded_query, metadata_embedding)
         all_comparisons.append(comparison)
     sorted_indices = np.argsort(all_comparisons)[::-1]
-    top_indices = sorted_indices[:num_similarities_shown]
+    top_indices = sorted_indices[:n]
     return [stored_metadatas[i] for i in top_indices]
-
 
 def cosine_similarity(chunk1, chunk2):
     dot_product = np.dot(chunk1, chunk2)
