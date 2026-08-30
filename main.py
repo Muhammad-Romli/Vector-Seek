@@ -3,11 +3,11 @@ import tempfile
 import threading
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from search_function import search_top_similarities
+from search_function import search_top_similarities, compare_vectors
 from os_functions.file_operator import read_from, convert_file_dict_to_dict_metadata
-from converter_functions.metadata_to_vector import metadata_to_vector
+from converter_functions.metadata_to_vector import metadata_to_vector, embed_chunks_and_query
 import json
 
 app = FastAPI()
