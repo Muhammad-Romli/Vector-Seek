@@ -57,8 +57,8 @@ This belong to title 1
     }]
     expected_result = [[{
         "from_file" : "test_file",
+        "from_title": "# Title 1",
         'chunk_id': 1,
-        "title": "# Title 1",
         "content": ["This belong to title 1"],
     }]]
     actual_result = convert_file_dict_to_dict_metadata(test_dict)

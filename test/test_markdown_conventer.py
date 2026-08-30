@@ -11,7 +11,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it
 
     expected_result = [{
         "from_file":  "Diary",
-        "title": "# Dear diary",
+        "from_title": "# Dear diary",
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     }]
@@ -36,13 +36,13 @@ For the last 3 days i got painful ulcer and right now is the peak of it
 
     expected_result = [{
         "from_file":  "Diary",
-        "title": "# Dear diary",
+        "from_title": "# Dear diary",
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     },
     {
         "from_file": "Diary",
-        "title": "# REASON WHY I HATE ULCER",
+        "from_title": "# REASON WHY I HATE ULCER",
         "chunk_id": 2,
         "content": ["""- Painful
 - Attack me for no reason
@@ -62,7 +62,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i
 
     expected_result = [{
         "from_file":  "Diary",
-        "title": None,
+        "from_title": None,
         "chunk_id": 0,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i forgot to add title"]
     }]
@@ -84,7 +84,7 @@ And i still code this day
 
     expected_result = [{
         "from_file":  "Diary",
-        "title": "# Dear diary",
+        "from_title": "# Dear diary",
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it", "And i still code this day"]
     }]
@@ -105,13 +105,13 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [
         {
             "from_file":  "Diary",
-            "title": None,
+            "from_title": None,
             "chunk_id": 0,
             "content": ["this diary wrote in August 20 2026"]
         },
         {
             "from_file":  "Diary",
-            "title": "# Dear diary",
+            "from_title": "# Dear diary",
             "chunk_id": 1,
             "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
         }
@@ -133,19 +133,19 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [
         {
             "from_file":  "Diary",
-            "title": None,
+            "from_title": None,
             "chunk_id": 0,
             "content": ["this diary wrote in August 20 2026"]
         },
         {
             "from_file":  "Diary",
-            "title": "# Dear diary",
+            "from_title": "# Dear diary",
             "chunk_id": 1,
             "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
         },
         {
             "from_file":  "Diary",
-            "title": "# END",
+            "from_title": "# END",
             "chunk_id": 2,
             "content": [None]
         }
