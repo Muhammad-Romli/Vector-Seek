@@ -1,5 +1,6 @@
-from sentence_transformers import SentenceTransformer
+from model_loader import get_model
 import json
+
 
 def metadata_to_vector(list_of_metadatas: list[list[dict[str, str | list[str] | None]]]):
     contents = [] 
@@ -24,7 +25,7 @@ def metadata_to_vector(list_of_metadatas: list[list[dict[str, str | list[str] | 
             else:
                 raise Exception("what type are you even are?")
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
+    model = get_model()
     embeddings = model.encode(
         contents,
         batch_size = 4,

@@ -1,0 +1,38 @@
+# ============================================================
+# VECTOR-SEEK — pyproject.toml
+# Replace (or add alongside) requirements.txt. FastAPI Cloud
+# uses uv under the hood, and uv reads this file for
+# dependencies — including WHICH index to install torch from.
+#
+# Fill in "dependencies" with what your code actually imports.
+# The important part is the [tool.uv.sources] / [[tool.uv.index]]
+# block below, which forces torch to come from the small
+# CPU-only wheel instead of the default CUDA-bundled one.
+# ============================================================
+
+[project]
+name = "vector-seek-api"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]",
+    "sentence-transformers",
+    "python-multipart",
+    "scikit-learn",
+    "torch",
+    # I dont think i need to add pytest because is not needed in API
+    # TODO: add anything else your code imports directly
+    # (transformers/tokenizers/numpy/scipy usually come in
+    # automatically as sentence-transformers' own dependencies —
+    # you don't need to list them unless you import them yourself)
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
