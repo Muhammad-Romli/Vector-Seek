@@ -1,11 +1,16 @@
 from model_loader import get_model
 import numpy as np
 
+# Why i divide my search_top similarities to 3?
+# in my frontend there is search-by-file, and is connected to embed_chunks_and_query.
+# Which mean the query is embedded too, so we only need the compare_vectors
+
+# And i also make encode query because there is endpoint called /search-demo
+
 
 def encode_query(query: str):
     model = get_model()
     return model.encode(query)
-
 
 def compare_vectors(embedded_query, stored_metadatas: list[dict], n: int) -> list[dict]:
     all_comparisons = []

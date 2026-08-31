@@ -1,11 +1,13 @@
 import shutil
 import tempfile
 import threading
+import numpy as np
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Body 
 from fastapi.middleware.cors import CORSMiddleware
 from search_function import search_top_similarities, compare_vectors
+from model_loader import get_model
 from os_functions.file_operator import read_from, convert_file_dict_to_dict_metadata
 from converter_functions.metadata_to_vector import metadata_to_vector, embed_chunks_and_query
 import json
@@ -36,11 +38,48 @@ def load_metadata():
 metadata = load_metadata()
 
 
-@app.get("/search")
+@app.get("/search-demo")
 def search(q: str, n: int = 5):
     with model_lock:
         results = search_top_similarities(q, metadata, n)
     return results
+
+
+@app.post("/search-by-vector")
+def search_by_vector(vector: list[float] = Body(...), n: int = 5):
+    expected_dim = get_model().get_embedding_dimension()
+    if len(vector) != expected_dim:
+        raise HTTPException(400, f"vector must have {expected_dim} dimensions, got {len(vector)}")
+    embedded_query = np.array(vector)
+    with model_lock:
+        results = compare_vectors(embedded_query, metadata, n)
+    return results
+
+@app.post("/search-by-file")
+def search_by_file(file: UploadFile = File(...), q: str = Form(...), n: int = 5):
+    data = file.file.read()
+    if len(data) > MAX_FILE_SIZE:
+        raise HTTPException(400, f"{file.filename} exceeds the {MAX_FILE_SIZE // (1024 * 1024)} MB limit")
+
+    tmp_dir = tempfile.mkdtemp(prefix="vector-seek-search-")
+    try:
+        if file.filename is None:
+            raise HTTPException(400, "File is no where to be found")
+        (Path(tmp_dir) / file.filename).write_bytes(data)
+        file_package = read_from(tmp_dir)
+
+        if file_package is None:
+            raise HTTPException(400, "No usable content found in upload")
+
+        package_of_metadatas = convert_file_dict_to_dict_metadata(file_package)
+
+        with model_lock:
+            chunk_metadatas, query_vector = embed_chunks_and_query(package_of_metadatas, q)
+            results = compare_vectors(query_vector, chunk_metadatas, n)
+
+        return results
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 @app.post("/build")
