@@ -5,7 +5,8 @@ import json
 # This function is the one that the CLI build.sh run from
 def metadata_to_vector(
     list_of_metadatas: list[list[dict[str, str | list[str] | None]]],
-    output_path: str | None = "embeddings.json"
+    output_path: str | None = "embeddings.json",
+    on_progress=None
 ) -> list[dict[str, str]]:
     contents = []
     all_embed_metadatas = []
@@ -26,11 +27,16 @@ def metadata_to_vector(
                     metadatas_without_content.append(metadata_wo_content)
 
     model = get_model()
-    embeddings = model.encode(
-        contents,
-        batch_size=4,
-        show_progress_bar=True
-    )
+    batch_size = 4
+    embeddings = []
+
+    for start in range(0, len(contents), batch_size):
+        batch = contents[start:start + batch_size]
+        batch_embeddings = model.encode(batch, batch_size=batch_size)
+        embeddings.extend(batch_embeddings)
+
+        if on_progress is not None:
+            on_progress(min(start + batch_size, len(contents)), len(contents))
 
     for i in range(len(embeddings)):
         print(i)
