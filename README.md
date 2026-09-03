@@ -149,6 +149,10 @@ embed_metadata = {
 ```
 </details>
 
+## AI Usage
+
+I use Ai for building the web socket, and it's purpose is only to show progress bar, so i don't think is gonna make critical mistake
+
 ## Related Projects
 
 - **[Oculus](https://github.com/Muhammad-Romli/Oculus)** — the frontend/web interface built on top of this backend.
