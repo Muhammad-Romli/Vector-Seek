@@ -16,7 +16,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://muhammad-romli.github.io/Oculus/index.html"],
+    allow_origins=["http://127.0.0.1:3000", "https://muhammad-romli.github.io/Oculus/index.html"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -38,6 +38,7 @@ def load_metadata():
 metadata = load_metadata()
 
 
+# /search-demo just search through my shared folder which is about animals
 @app.get("/search-demo")
 def search(q: str, n: int = 5):
     with model_lock:
