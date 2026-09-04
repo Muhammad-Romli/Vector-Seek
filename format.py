@@ -27,9 +27,9 @@ def format_top_similarity(embed_metadatas: list[dict], num_shown: int):
         {BOLD}{GREEN}RESULT {count}{RESET}:
 {wrapped_text}
 
-{BRIGHT_GREEN}{BOLD}f"{'FROM_FILE':<12}:"{RESET} {embed_metadata["metadata"]["from_file"]}
-{BRIGHT_GREEN}{BOLD}f"{'FROM_TITLE':<12}:"{RESET} {embed_metadata["metadata"]["from_title"]}
-{BRIGHT_GREEN}{BOLD}f"{'CHUNK ID':12}:"{RESET} {embed_metadata["metadata"]["chunk_id"]}
+{BRIGHT_GREEN}{BOLD}{'FROM_FILE':<12}:{RESET} {embed_metadata["metadata"]["from_file"]}
+{BRIGHT_GREEN}{BOLD}{'FROM_TITLE':<12}:{RESET} {embed_metadata["metadata"]["from_title"]}
+{BRIGHT_GREEN}{BOLD}{'CHUNK ID':12}:{RESET} {embed_metadata["metadata"]["chunk_id"]}
 
 
 {"_" * width}
