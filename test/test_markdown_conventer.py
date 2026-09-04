@@ -12,6 +12,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [{
         "from_file":  "Diary",
         "from_title": "# Dear diary",
+        "sub_title": None,
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     }]
@@ -37,12 +38,14 @@ For the last 3 days i got painful ulcer and right now is the peak of it
     expected_result = [{
         "from_file":  "Diary",
         "from_title": "# Dear diary",
+        "sub_title": None,
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
     },
     {
         "from_file": "Diary",
         "from_title": "# REASON WHY I HATE ULCER",
+        "sub_title": None,
         "chunk_id": 2,
         "content": ["""- Painful
 - Attack me for no reason
@@ -63,6 +66,7 @@ For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i
     expected_result = [{
         "from_file":  "Diary",
         "from_title": None,
+        "sub_title": None,
         "chunk_id": 0,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it. uhhh, i forgot to add title"]
     }]
@@ -85,6 +89,7 @@ And i still code this day
     expected_result = [{
         "from_file":  "Diary",
         "from_title": "# Dear diary",
+        "sub_title": None,
         "chunk_id": 1,
         "content": ["For the last 3 days i got painful ulcer and right now is the peak of it", "And i still code this day"]
     }]
@@ -106,12 +111,14 @@ For the last 3 days i got painful ulcer and right now is the peak of it
         {
             "from_file":  "Diary",
             "from_title": None,
+            "sub_title": None,
             "chunk_id": 0,
             "content": ["this diary wrote in August 20 2026"]
         },
         {
             "from_file":  "Diary",
             "from_title": "# Dear diary",
+            "sub_title": None,
             "chunk_id": 1,
             "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
         }
@@ -123,6 +130,7 @@ def test_title_with_no_contents_at_the_end():
     
     actual_result = markdown_to_dict_metadata("Diary", """
 this diary wrote in August 20 2026
+
 # Dear diary
 
 For the last 3 days i got painful ulcer and right now is the peak of it
@@ -134,21 +142,137 @@ For the last 3 days i got painful ulcer and right now is the peak of it
         {
             "from_file":  "Diary",
             "from_title": None,
+            "sub_title": None,
             "chunk_id": 0,
             "content": ["this diary wrote in August 20 2026"]
         },
         {
             "from_file":  "Diary",
             "from_title": "# Dear diary",
+            "sub_title": None,
             "chunk_id": 1,
             "content": ["For the last 3 days i got painful ulcer and right now is the peak of it"]
+        }
+    ]
+
+    assert actual_result == expected_result
+
+
+def test_title_with_sub_title_at_the_end():
+    
+    actual_result = markdown_to_dict_metadata("Diary", """
+this diary wrote in March 04 2026
+
+# Dear diary
+
+Just recently, i learnt that is okay to be yourself,
+maybe not for me and my school environment, but she somehow did it. 
+i wish i was that brave...
+
+She was smart, nice, unique, beautiful and most importantly,
+she can enjoy her life without being afraid.
+she just wear earphone in class and be herself,
+she doesn't care her backpacks have many stickers,
+she doesn't scared to make whatsapp statuses,
+she don't care if anyone see her badly by her personalities by how she sit,
+unlike me....
+is small things, but is might be my top 10 most feared things,
+she really inspired me to just, let go...
+
+# END
+## I promise if i become success and if ONLY i become success
+""")
+
+    expected_result = [
+        {
+            "from_file":  "Diary",
+            "from_title": None,
+            "sub_title": None,
+            "chunk_id": 0,
+            "content": ["this diary wrote in March 04 2026"]
         },
         {
             "from_file":  "Diary",
-            "from_title": "# END",
-            "chunk_id": 2,
-            "content": [None]
+            "from_title": "# Dear diary",
+            "sub_title": None,
+            "chunk_id": 1,
+            "content": ["""Just recently, i learnt that is okay to be yourself,
+maybe not for me and my school environment, but she somehow did it. 
+i wish i was that brave...""", """She was smart, nice, unique, beautiful and most importantly,
+she can enjoy her life without being afraid.
+she just wear earphone in class and be herself,
+she doesn't care her backpacks have many stickers,
+she doesn't scared to make whatsapp statuses,
+she don't care if anyone see her badly by her personalities by how she sit,
+unlike me....
+is small things, but is might be my top 10 most feared things,
+she really inspired me to just, let go..."""]
         }
+    ]
+
+    assert actual_result == expected_result
+
+
+
+def test_sub_title_with_content_at_end():
+    
+    actual_result = markdown_to_dict_metadata("Diary", """
+this diary wrote in March 04 2026
+
+# Dear diary
+
+Just recently, i learnt that is okay to be yourself,
+maybe not for me and my school environment, but she somehow did it. 
+i wish i was that brave...
+
+She was smart, nice, unique, beautiful and most importantly,
+she can enjoy her life without being afraid.
+she just wear earphone in class and be herself,
+she doesn't care her backpacks have many stickers,
+she doesn't scared to make whatsapp statuses,
+she don't care if anyone see her badly by her personalities by how she sit,
+unlike me....
+is small things, but is might be my top 10 most feared things,
+she really inspired me to just, let go...
+
+# From The Future
+## I promise if i become success and if ONLY i become success
+Message from me in the future after getting job:
+
+""")
+
+    expected_result = [
+        {
+            "from_file":  "Diary",
+            "from_title": None,
+            "sub_title": None,
+            "chunk_id": 0,
+            "content": ["this diary wrote in March 04 2026"]
+        },
+        {
+            "from_file":  "Diary",
+            "from_title": "# Dear diary",
+            "sub_title": None,
+            "chunk_id": 1,
+            "content": ["""Just recently, i learnt that is okay to be yourself,
+maybe not for me and my school environment, but she somehow did it. 
+i wish i was that brave...""", """She was smart, nice, unique, beautiful and most importantly,
+she can enjoy her life without being afraid.
+she just wear earphone in class and be herself,
+she doesn't care her backpacks have many stickers,
+she doesn't scared to make whatsapp statuses,
+she don't care if anyone see her badly by her personalities by how she sit,
+unlike me....
+is small things, but is might be my top 10 most feared things,
+she really inspired me to just, let go..."""]
+        },
+        {
+            "from_file":  "Diary",
+            "from_title": "# From The Future",
+            "sub_title": "## I promise if i become success and if ONLY i become success",
+            "chunk_id": 3,
+            "content": ["Message from me in the future after getting job:"]
+        },
     ]
 
     assert actual_result == expected_result
