@@ -128,9 +128,10 @@ file_package = {
 ```python
 chunk = {
     "from_file": file_name,
-    "from_title": from_title,
+    "from_title": current_title,
+    "sub_title": current_subtitle,
     "chunk_id": index_num,
-    "content": content.split("\n\n"),  # split by paragraph
+    "content": content.split("\n\n") # Get splitted for each double /n for more readability
 }
 # list[list[dict[str, str]]]
 ```
