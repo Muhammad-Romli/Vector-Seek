@@ -8,28 +8,30 @@ GREEN = "\033[32m"
 CYAN = "\033[36m"
 BRIGHT_GREEN = "\033[92m"
 
-def format_top_similarity(embed_metadatas: list[dict], num_shown: int):
-    width = shutil.get_terminal_size().columns
+def format_top_similarity(embed_metadatas: list[dict], top_scores: list[float], num_shown: int):
 
+    width = shutil.get_terminal_size().columns
     print("\n" * 3)
     print("=" * width)
     print(f"                    {CYAN}{BOLD}Result of similarities search from most similar to least:{RESET}                    ")
     print("=" * width)
     count = 0
-    for embed_metadata in embed_metadatas[:num_shown]:
-        wrapped_text = textwrap.fill(embed_metadata["content"], 
-                                    width=100,
-                                    initial_indent="\t",
-                                    subsequent_indent="\t",)
+    for i in range(min(num_shown, len(embed_metadatas))):
+        wrapped_text = textwrap.fill(embed_metadatas[i]["content"], 
+        width=100,
+        initial_indent="\t",
+        subsequent_indent="\t",)
         count += 1
         print(f"""
 
         {BOLD}{GREEN}RESULT {count}{RESET}:
 {wrapped_text}
 
-{BRIGHT_GREEN}{BOLD}{'FROM_FILE':<12}:{RESET} {embed_metadata["metadata"]["from_file"]}
-{BRIGHT_GREEN}{BOLD}{'FROM_TITLE':<12}:{RESET} {embed_metadata["metadata"]["from_title"]}
-{BRIGHT_GREEN}{BOLD}{'CHUNK ID':12}:{RESET} {embed_metadata["metadata"]["chunk_id"]}
+{BRIGHT_GREEN}{BOLD}{'FROM_FILE':<12}:{RESET} {embed_metadatas[i]["metadata"]["from_file"]}
+{BRIGHT_GREEN}{BOLD}{'FROM_TITLE':<12}:{RESET} {embed_metadatas[i]["metadata"]["from_title"]}
+{BRIGHT_GREEN}{BOLD}{'SUB_TITLE:':<12}:{RESET} {embed_metadatas[i]["metadata"]["sub_title"]}
+{BRIGHT_GREEN}{BOLD}{'SCORE':<12}:{RESET} {top_scores[i]}
+{BRIGHT_GREEN}{BOLD}{'CHUNK ID':12}:{RESET} {embed_metadatas[i]["metadata"]["chunk_id"]}
 
 
 {"_" * width}

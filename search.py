@@ -13,5 +13,5 @@ args = parser.parse_args()
 
 with open("embeddings.json", "r", encoding="utf-8") as json_file:
     metadata = json.load(json_file)
-top_similarities_embed_metadatas = search_top_similarities(args.query, metadata, args.num_of_similarities)
-format_top_similarity(top_similarities_embed_metadatas, args.num_of_similarities) 
+top_similarities_embed_metadatas, top_scores = search_top_similarities(args.query, metadata, args.num_of_similarities)
+format_top_similarity(top_similarities_embed_metadatas, top_scores, args.num_of_similarities) 
